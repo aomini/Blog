@@ -1,2 +1,2 @@
-# restApi
-practising rest api
+# Blog writing
+
