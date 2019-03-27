@@ -9,6 +9,11 @@ use App\Http\Resources\Article as ArticleResource;
 
 class ArticleController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth')->only(['store']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +22,7 @@ class ArticleController extends Controller
     public function index()
     {
         // Get articles
-        $articles = Article::paginate(15);
+        $articles = Article::all();                
 
         // Return collection of articles as a resource
         return ArticleResource::collection($articles);
@@ -32,16 +37,59 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        $article = $request->isMethod('put') ? Article::findOrFail($request->article_id) : new Article;
+        $formatted_data = $this->bulkFormatter($request);
 
-        $article->id = $request->input('article_id');
-        $article->title = $request->input('title');
-        $article->body = $request->input('body');
+        if(! empty($formatted_data)){
 
-        if($article->save()) {
-            return new ArticleResource($article);
-        }
+            foreach ($formatted_data as $key => $value) {
+
+                $article = new Article();
+
+                $value['user_id'] = auth()->id();
+
+                $article->create($value);
+
+            }
+
+        }else{
+            
+
+            $article = $request->isMethod('put') ? Article::findOrFail($request->article_id) : new Article;
+
+            $article->id = $request->input('article_id');
+            $article->title = $request->input('title');
+            $article->body = $request->input('body');
+            $article->user_id = 1;
+            
+
+            if($article->save()) {
+                return new ArticleResource($article);
+               
+            }
+
+        }       
         
+    }
+
+    private function bulkFormatter(Request $request){
+
+        $temp = [];
+
+        foreach($request->all() as $key => $value){
+
+            if( is_array($value) ){
+                for($i = 0; $i < sizeof( $value ); $i++){
+
+                    $temp[$i][$key] = $value[$i];
+
+
+                }
+            }
+
+        } 
+
+        return $temp;
+
     }
 
     /**
