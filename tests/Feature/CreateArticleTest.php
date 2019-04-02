@@ -22,11 +22,11 @@ class CreateArticleTest extends TestCase
 
         $user = $this->signIn();
     	
-    	$article = factory('App\Article')->create();
+    	$article = factory('App\Article')->make();
 
-    	$this->post('api/article', $article->toArray()); 
+    	$this->post('article', $article->toArray()); 
 
-    	$this->assertDatabaseHas('articles', ['id' => $article->id, 'user_id' => $user->id]);   	
+    	$this->assertDatabaseHas('articles', ['title' => $article->title, 'user_id' => $user->id]);   	
 
     }
 
@@ -42,12 +42,39 @@ class CreateArticleTest extends TestCase
     	$article['title'] = $title;
     	$article['body'] = $body;
 
-    	$this->post('api/article', $article);
+    	$this->post('article', $article);
 
     	$this->assertDatabaseHas('articles', ['title' => $article['title'][0], 'user_id' => 1]);
     	$this->assertDatabaseHas('articles', ['title' => $article['title'][1]]);
 
     }
+
+    /** @test*/
+    public function a_user_can_only_delete_his_article(){
+        
+        $user = $this->signIn();
+
+        $own_article = factory('App\Article')->create(['user_id' => $user->id]);
+        $others_article = factory('App\Article')->create([
+            'user_id' => function(){
+                return factory('App\User')->create()->id;
+            }
+        ]);
+
+        try{
+           $this->JSON('DELETE', "/article/{$own_article->slug}");
+           $this->assertDatabaseMissing('articles', ["id" => $own_article->id]); 
+       }catch(\Exception $e){
+            $this->fail("cannot delete others");
+       }
+
+       
+
+        
+
+    }
+   
+    
 
 }
 

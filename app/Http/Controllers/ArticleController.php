@@ -11,7 +11,7 @@ class ArticleController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth')->only(['store']);
+        $this->middleware('auth')->only(['store', 'destroy']);
     }
 
     /**
@@ -22,10 +22,12 @@ class ArticleController extends Controller
     public function index()
     {
         // Get articles
-        $articles = Article::all();                
+        $articles = Article::latest()->with('user')->paginate(5);  
+
+        return $articles;
 
         // Return collection of articles as a resource
-        return ArticleResource::collection($articles);
+        // return ArticleResource::collection($articles);
     }
 
 
@@ -59,12 +61,11 @@ class ArticleController extends Controller
             $article->id = $request->input('article_id');
             $article->title = $request->input('title');
             $article->body = $request->input('body');
-            $article->user_id = 1;
-            
+            $article->slug = $request->title;
+            $article->user_id = auth()->id();           
 
             if($article->save()) {
-                return new ArticleResource($article);
-               
+                return redirect('/');              
             }
 
         }       
@@ -82,7 +83,6 @@ class ArticleController extends Controller
 
                     $temp[$i][$key] = $value[$i];
 
-
                 }
             }
 
@@ -98,13 +98,12 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        // Get article
-        $article = Article::findOrFail($id);
-
-        // Return single article as a resource
-        return new ArticleResource($article);
+        return view('article.show',[
+            'article' => $article,
+            'comments' => $article->comments
+        ]);
     }
 
     /**
@@ -113,13 +112,16 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Article $article)
     {
-        // Get article
-        $article = Article::findOrFail($id);
+        if($article->user_id == auth()->id()):
+            if($article->delete()){
+                $article->comments()->delete();
+            }
+            return redirect('/');  
+        else:
+            abort("permission denied");
+        endif; 
 
-        if($article->delete()) {
-            return new ArticleResource($article);
-        }    
     }
 }

@@ -2,7 +2,8 @@
 	<div>
 		<h2>Articles</h2>
 		<div class="card card-body mb-2" v-for="article in articles" :key="article.id">
-			<h3>{{ article.title }}</h3>
+			<h3><a :href="'/profile/'+article.user.name">{{article.user.name}}</a> posted 
+				<a :href="'article/'+article.slug">{{ article.title }}</a></h3>
 			<p>{{ article.body }}</p>
 		</div>
 	</div>
@@ -16,7 +17,8 @@
 				article:{
 					id:'',
 					title: '',
-					body:''
+					body:'',
+					name: ''
 				},
 				article_id:'',
 				pagination:{},
@@ -29,7 +31,7 @@
 		methods:{
 			fetchArticles(page_url){
 				let vm = this;
-				page_url = page_url || 'api/articles';
+				page_url = page_url || 'articles';
 				fetch(page_url)
 				.then(res => res.json())
 				.then(res=>{
