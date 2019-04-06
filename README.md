@@ -1,5 +1,5 @@
 # Table of contents
-[Headers](#delete)
+[Headers](#delete permission)
 ## Favourites
 ## Activity Feeds
 ## Laravel debugger
