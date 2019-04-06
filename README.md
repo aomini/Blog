@@ -28,11 +28,11 @@ Gate::before(function($user){
 ## Favourites
 
 
-__ favourites is acheived using morph to relation and used traits __
+> favourites is acheived using morph to relation and used traits
 
 - Trait
 
-```
+```php
 trait Favouritable{
 
 	public function favourites(){
@@ -65,7 +65,7 @@ trait Favouritable{
     - method to favourite comment for example    
     
     
-    ```
+    ```php
     public function favouriteComment(Comment $comment){
 
 		$comment->favouritable();
