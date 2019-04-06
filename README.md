@@ -1,5 +1,5 @@
 # Table of contents
-## Delete permisison
+[Headers][#delete permission]
 ## Favourites
 ## Activity Feeds
 ## Laravel debugger
@@ -7,7 +7,7 @@
 
 
 
-
+<a href="delete permission">
 ## Delete permisison
 
 >This demonstrates the use of laravel policies.
