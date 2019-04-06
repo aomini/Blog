@@ -1,4 +1,4 @@
-# Article forum with TDD. Started with Brad's (laravel with vue demonstration) blog repo and ended up doing TDD in the same repository and made it into a forum. 
+### Article forum with TDD. Started with Brad's (laravel with vue demonstration) blog repo and ended up doing TDD in the same repository and made it into a forum. 
 
 
 #### Table of contents
