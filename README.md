@@ -3,7 +3,7 @@
 # laravel debugger
 # Activity feeds
 # filters
-** Delete permisison **
+__ Delete permisison __
 Deletion permission is achieved using the Laravel Policy on update function. Gate is created for super Admin.
 
 >Delete associated replies**
