@@ -1,13 +1,13 @@
 # Table of contents
-[Headers](#delete permission)
-## Favourites
+[Delete permission](#delete_permission)
+[Favourites with morph](#favourites)
 ## Activity Feeds
 ## Laravel debugger
 ## Filters
 ...snip...
 
 
-<a name="delete"/>
+<a name="delete_permission"/>
 ## Delete permisison
 
 >This demonstrates the use of laravel policies.
@@ -33,7 +33,7 @@ Gate::before(function($user){
 
 >Deletion can only be done by the creater.
 
-
+<a name="favoruites">
 ## Favourites
 
 
