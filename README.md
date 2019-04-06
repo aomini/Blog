@@ -7,15 +7,15 @@ __Delete permisison__
 1. Deletion permission is achieved using the Laravel Policy on update function. 
 ```php
 public function update(User $user, Article $article)
-    {
-        return $user->articles->contains($article);
-    }
+{
+    return $user->articles->contains($article);
+}
     
 ```
 >Usage
 `@can('update', $article) / @cannot`
 1.Gate is created for super Admin.
-```
+```php
 Gate::before(function($user){
   return $user->id === 1 ? true : false;
 });
