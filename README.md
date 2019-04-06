@@ -3,6 +3,9 @@
 
 
 [Favourites with morph](#favourites)
+
+[Activity Feeds with laravel event listeners](#activity_feeds)
+
 ## Activity Feeds
 ## Laravel debugger
 ## Filters
@@ -88,3 +91,8 @@ trait Favouritable{
 
 	}
     ```
+    
+<a name="activity_feeds">
+	
+	
+## Activity Feeds
