@@ -1,9 +1,7 @@
-
-# favourites -> working
 # laravel debugger
 # Activity feeds
 # filters
-##Delete permisison
+## Delete permisison
 - Deletion permission is achieved using the Laravel Policy on update function. 
 ```php
 public function update(User $user, Article $article)
