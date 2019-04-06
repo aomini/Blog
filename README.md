@@ -1,4 +1,7 @@
-# Table of contents
+# Article forum with TDD. Started with Brad's (laravel with vue demonstration) blog repo and ended up doing TDD in the same repository and made it into a forum. 
+
+
+#### Table of contents
 [Delete permission](#delete_permission)
 
 
@@ -14,12 +17,12 @@
 <a name="delete_permission"/>
 
 
-## Delete permisison
+## Permisison
 
 >This demonstrates the use of laravel policies.
 
 
-- Deletion permission is achieved using the Laravel Policy on update function. 
+- Permisisons are achieve using laravel policies.Defined permisison on update. 
 ```php
 public function update(User $user, Article $article)
 {
@@ -29,23 +32,21 @@ public function update(User $user, Article $article)
 ```
 >Usage
 `@can('update', $article) / @cannot`
-- Gate is created for super Admin.
+- Gate is created for super Admin giving access to do anything on the forum.
 ```php
 Gate::before(function($user){
   return $user->id === 1 ? true : false;
 });
 ```
->Delete associated replies
 
->Deletion can only be done by the creater.
 
 <a name="favourites">
 	
 	
 ## Favourites
 
-
-> favourites is acheived using morph to relation and used traits
+> A user can favourite articles & comments so need to have a `favourites` table with `polymorphic` relation.
+> Favourites is acheived using morph to relation and used traits since we can favourite both articles and comments.
 
 - Trait
 
