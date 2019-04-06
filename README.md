@@ -1,13 +1,13 @@
 # Table of contents
-[Headers](#delete permission)
+[Headers](#delete)
 ## Favourites
 ## Activity Feeds
 ## Laravel debugger
 ## Filters
+...snip...
 
 
-
-<a name="delete permission"/>
+<a name="delete"/>
 ## Delete permisison
 
 >This demonstrates the use of laravel policies.
