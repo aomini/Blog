@@ -1,9 +1,13 @@
 # Table of contents
 ## Delete permisison
+## Favourites
+## Activity Feeds
+## Laravel debugger
+## Filters
 
-# laravel debugger
-# Activity feeds
-# filters
+
+
+
 ## Delete permisison
 
 >This demonstrates the use of laravel policies.
