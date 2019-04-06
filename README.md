@@ -25,10 +25,13 @@ Gate::before(function($user){
 >Deletion can only be done by the creater.
 
 
-##Favourites
+## Favourites
+
+
 __ favourites is acheived using morph to relation and used traits __
 
--Trait
+- Trait
+
 ```
 trait Favouritable{
 
@@ -50,16 +53,16 @@ trait Favouritable{
 			$this->favourites()->create($attributes);
 		}
 	}
-
-	public function isFavourited(){
+	
+	/* This function checks if the given model instance is already favourited or not */
+	public function isFavourited(){ 
 		return !! $this->favourites()->where('user_id', auth()->id())->count();
 	}
 }
 ```
 
-- FAvourite controller methods
-    - method to favourite comment for example
-    
+- Favourite controller methods
+    - method to favourite comment for example    
     
     
     ```
