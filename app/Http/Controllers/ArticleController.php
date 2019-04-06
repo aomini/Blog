@@ -114,14 +114,15 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        if($article->user_id == auth()->id()):
-            if($article->delete()){
-                $article->comments()->delete();
-            }
-            return redirect('/');  
-        else:
-            abort("permission denied");
-        endif; 
+
+        $this->authorize('update', $article);
+
+        $article->delete();
+        return redirect('/');  
+        // if($article->user_id == auth()->id()):
+        // else:
+        //     abort("permission denied");
+        // endif; 
 
     }
 }

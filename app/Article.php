@@ -2,13 +2,23 @@
 
 namespace App;
 
+use App\Traits\Comment\Favouritable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class Article extends Model
-{
-    
+{ 	
+ 	use Favouritable;  
+
 	protected $guarded = [];
+
+	public static function boot(){
+
+		static::deleting(function($model){
+			$model->comments()->delete();
+		});
+
+	}
 
 	public function user(){
 		return $this->belongsTo(User::class);
@@ -40,5 +50,6 @@ class Article extends Model
 		]);
 		
 	}
+
 
 }

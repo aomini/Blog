@@ -46,3 +46,9 @@ Route::post('article/{article}/comment', 'CommentController@store');
 /* Profile */
 
 Route::get('/profile/{user}', 'ProfileController@index');
+
+/* Favourites */
+
+Route::post('/comment/{comment}/favourite', 'FavouritesController@favouriteComment')->middleware('auth');
+
+Route::post('/article/{article}/favourite', 'FavouritesController@favouriteArticle')->middleware('auth');
