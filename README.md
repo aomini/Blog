@@ -9,7 +9,7 @@
 
 [Activity Feeds with laravel event listeners](#activity_feeds)
 
-## Activity Feeds
+
 ## Laravel debugger
 ## Filters
 
@@ -97,3 +97,42 @@ trait Favouritable{
 	
 	
 ## Activity Feeds
+
+> Activity feeds records the CRUD's changes made to the database by the users.
+
+
+* When user make changes to the `articles` table an activity is recorded *
+we have created a polymorphic relation here as well inorder to record the activities to various tables
+
+```php
+public function activityLogs(){
+
+    return $this->morphMany(Activity::class,'subject','subject','subject_id');
+
+}
+```
+
+__ Activity is recorded as __
+```php
+public function recordActivity(){
+
+	$this->activityLogs()->create([
+
+		'type'	=> 'created_article',
+		'user_id'	=> auth()->id()
+
+	]);
+
+}
+```
+
+__ on boot method __ 
+
+
+```php
+static::created(function($model){
+
+	$model->recordActivity();
+
+});
+```
