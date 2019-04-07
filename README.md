@@ -128,8 +128,7 @@ public function recordActivity(){
 }
 ```
 
-__ on boot method __ 
-
+* On what cycle should we record the activity is specified on the `boot` method
 
 ```php
 static::created(function($model){
