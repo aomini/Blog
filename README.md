@@ -102,7 +102,9 @@ trait Favouritable{
 
 
 * When user make changes to the `articles` table an activity is recorded *
-we have created a polymorphic relation here as well inorder to record the activities to various tables
+
+
+>we have created a polymorphic relation here as well inorder to record the activities to various tables
 
 ```php
 public function activityLogs(){
@@ -112,7 +114,7 @@ public function activityLogs(){
 }
 ```
 
-__ Activity is recorded as __
+* Activity is recorded as *
 ```php
 public function recordActivity(){
 
