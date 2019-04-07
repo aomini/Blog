@@ -101,7 +101,7 @@ trait Favouritable{
 > Activity feeds records the CRUD's changes made to the database by the users.
 
 
-* When user make changes to the `articles` table an activity is recorded *
+* When user make changes to the `articles` table an activity is recorded 
 
 
 >we have created a polymorphic relation here as well inorder to record the activities to various tables
@@ -114,7 +114,7 @@ public function activityLogs(){
 }
 ```
 
-* Activity is recorded as *
+* Activity is recorded as 
 ```php
 public function recordActivity(){
 
