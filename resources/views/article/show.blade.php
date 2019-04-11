@@ -20,7 +20,6 @@
 									{{$article->favourites_count}}&nbsp;{{str_plural('favourite',$article->favourites_count)}}
 								</button>
 							</form>
-							
 							@can('update', $article)
 								<form action="/article/{{$article->slug}}" method="POST">
 									{{ csrf_field() }}
@@ -29,7 +28,8 @@
 
 									<button class="btn btn-link" type="submit">Delete</button>							
 									
-								</form>								
+								</form>	
+
 							@endcan	
 						</div>
 

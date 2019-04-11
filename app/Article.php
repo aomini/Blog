@@ -6,18 +6,21 @@ use App\Traits\Comment\Favouritable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
+use App\Traits\ActivityLog\ActivityLogTrait;
+
 class Article extends Model
 { 	
- 	use Favouritable;  
+ 	use Favouritable, ActivityLogTrait;  
 
 	protected $guarded = [];
 
 	public static function boot(){
 
+		parent::boot();
+
 		static::deleting(function($model){
 			$model->comments()->delete();
 		});
-
 	}
 
 	public function user(){

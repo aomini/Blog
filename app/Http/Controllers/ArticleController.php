@@ -118,11 +118,9 @@ class ArticleController extends Controller
         $this->authorize('update', $article);
 
         $article->delete();
+
         return redirect('/');  
-        // if($article->user_id == auth()->id()):
-        // else:
-        //     abort("permission denied");
-        // endif; 
+        
 
     }
 }

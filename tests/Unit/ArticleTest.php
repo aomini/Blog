@@ -21,5 +21,6 @@ class ArticleTest extends TestCase
 		$this->assertDatabaseHas('articles', ['slug' => str_slug($slug)]); 
     }
 
+ 
 }
 
